@@ -12,18 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import os
-import logging
 import speedtest
 
 from adapt.intent import IntentBuilder
 from mycroft.skills.core import MycroftSkill, intent_handler
-from mycroft.util.log import LOG
-from mycroft.audio import wait_while_speaking 
 from mycroft.util.log import getLogger
 
 logger = getLogger(__name__)
-
 
 __author__ = 'luke5sky'
 
@@ -34,18 +29,22 @@ class speedtestSkill(MycroftSkill):
         
     @intent_handler(IntentBuilder("").require("Run").require("Speedtest").build())
     def handle_speedtest__intent(self, message):
-        servers = []
-        # If you want to test against a specific server
-        # servers = [1234]
-        s = speedtest.Speedtest()
-        s.get_servers(servers)
-        s.get_best_server()
-        s.download()
-        s.upload()
-        s.results.share()
-        results_dict = s.results.dict()
-        print(results_dict)
-        logger.info("Request finished")
+        try:
+            self.speak_dialog('running')
+            servers = []
+            speed = speedtest.Speedtest()
+            speed.get_servers(servers)
+            speed.get_best_server()
+            speed.download()
+            speed.upload()
+            speed.results.share()
+            result = speed.results.dict()
+            downspeed = ('%.2f' % float((result["download"])/1000000)).replace(".", ",")
+            upspeed = ('%.2f' % float((result["upload"])/1000000)).replace(".", ",")
+            self.speak_dialog('result', {'DOWN': downspeed,'UP': upspeed})
+        except:
+            self.speak_dialog("error")
+        logger.info("speedtest finished")
 
     def shutdown(self):
         super(speedtestSkill, self).shutdown()
