@@ -29,6 +29,7 @@ class speedtestSkill(MycroftSkill):
         
     @intent_handler(IntentBuilder("SpeedtestIntent").require("Run").require("Speedtest").build())
     def handle_speedtest__intent(self, message):
+        logger.info("speedtest started")
         try:
             self.speak_dialog('running')
             servers = []
