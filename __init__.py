@@ -39,8 +39,8 @@ class speedtestSkill(MycroftSkill):
             speed.upload(pre_allocate=False)
             speed.results.share()
             result = speed.results.dict()
-            downspeed = ('%.2f' % float((result["download"])/1000000)).replace(".", ",")
-            upspeed = ('%.2f' % float((result["upload"])/1000000)).replace(".", ",")
+            downspeed = ('%.2f' % float((result["download"])/1000000))#.replace(".", ",")
+            upspeed = ('%.2f' % float((result["upload"])/1000000))#.replace(".", ",")
             self.speak_dialog('result', {'DOWN': downspeed,'UP': upspeed})
         except:
             self.speak_dialog("error")
