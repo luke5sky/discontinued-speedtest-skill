@@ -27,7 +27,7 @@ class speedtestSkill(MycroftSkill):
     def __init__(self):
         super(speedtestSkill, self).__init__(name="speedtestSkill")
         
-    @intent_handler(IntentBuilder("").require("Run").require("Speedtest").build())
+    @intent_handler(IntentBuilder("SpeedtestIntent").require("Run").require("Speedtest").build())
     def handle_speedtest__intent(self, message):
         try:
             self.speak_dialog('running')
