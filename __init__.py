@@ -36,7 +36,7 @@ class speedtestSkill(MycroftSkill):
             speed.get_servers(servers)
             speed.get_best_server()
             speed.download()
-            speed.upload()
+            speed.upload(pre_allocate=False)
             speed.results.share()
             result = speed.results.dict()
             downspeed = ('%.2f' % float((result["download"])/1000000)).replace(".", ",")
