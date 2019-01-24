@@ -1,5 +1,5 @@
 # <img src='https://raw.githack.com/FortAwesome/Font-Awesome/master/svgs/solid/signal.svg' card_color='#40DBB0' width='50' height='50' style='vertical-align:bottom'/> Speedtest
-Ask MyCroft to run a simple speedtest.
+Ask Mycroft to run a simple speedtest.
 
 ## About 
 Run a speedtest with Mycroft.
